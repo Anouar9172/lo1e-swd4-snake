@@ -17,13 +17,13 @@ function drawSnake(){
   context.fillRect(snakeX, snakeY, 20, 20);
 }
 function update() {
-  if(direction == 'right') {
+  if(direction == "right") {
     snakeX += 20;
-  } else if(direction == 'left') {
+  } else if(direction == "left") {
     snakeX -= 20;
-  } else if(direction == 'up'){
+  } else if(direction == "up"){
   snakeY -= 20;
-} else if(direction == 'down'){
+} else if(direction == "down"){
   snakeY += 20;
 }
 drawBackrgound();
@@ -31,7 +31,16 @@ drawSnake();
 }
 
 function changeDirection(event) {
+  if (event.code == "ArrowUp") {
+    direction = "up";
+  } else if (event.code == "ArrowRight") {
+    direction = "right";
+  } else if (event.code == "ArrowLeft") {
+    direction = "left";
+  } else if (event.code == "ArrowDown") {
+    direction = "down";
   console.log('direction');
+}
 }
 
 drawBackrgound();
