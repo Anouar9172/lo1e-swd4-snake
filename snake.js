@@ -40,6 +40,40 @@ function update() {
     let tailX = snake[tailIndex].x;
     let tailY = snake[tailIndex].y;
 
+    let headX = snake[0].x;
+    let headY = snake[0].y;
+
+
+
+    if (direction == "right") {
+        if (headX < 380) {
+            headX.x += 20;
+        } else {
+            gameOver();
+        }
+
+    } else if (direction == "left") {
+        if (headX > 0) {
+            headX -= 20;
+        } else {
+            gameOver();
+        }
+
+    } else if (direction == "up") {
+        if (headY > 0) {
+            headY -= 20;
+        } else {
+            gameOver();
+        }
+
+    } else if (direction == "down") {
+        if (headY < 380) {
+            headY += 20;
+        } else {
+            gameOver();
+        }
+    }
+
     if(direction != null) {
         for(let index = snake.length - 1; index > 0; index--) {
             snake[index].x = snake[index - 1].x;
@@ -47,34 +81,8 @@ function update() {
         }
     }
 
-    if (direction == "right") {
-        if (snake[0].x < 380) {
-            snake[0].x += 20;
-        } else {
-            gameOver();
-        }
-
-    } else if (direction == "left") {
-        if (snake[0].x > 0) {
-            snake[0].x -= 20;
-        } else {
-            gameOver();
-        }
-
-    } else if (direction == "up") {
-        if (snake[0].y > 0) {
-            snake[0].y -= 20;
-        } else {
-            gameOver();
-        }
-
-    } else if (direction == "down") {
-        if (snake[0].y < 380) {
-            snake[0].y += 20;
-        } else {
-            gameOver();
-        }
-    }
+    snake[0].x = headX;
+    snake[0].y = headY;
 
     // Appel eten als positie snake en food zelfde zijn.
     if (foodX == snake[0].x && foodY == snake[0].y) {
@@ -96,13 +104,21 @@ function update() {
 
 function changeDirection(event) {
     if (event.code == "ArrowUp") {
+      if (direction != 'down') {
         direction = "up";
+      }
     } else if (event.code == "ArrowRight") {
+      if (direction != 'left') {
         direction = "right";
+      }
     } else if (event.code == "ArrowLeft") {
+      if (direction != 'right') {
         direction = "left";
+      }
     } else if (event.code == "ArrowDown") {
+      if (direction != 'up') {
         direction = "down";
+      }
     }
 }
 
